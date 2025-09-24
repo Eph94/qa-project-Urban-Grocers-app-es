@@ -9,7 +9,7 @@ def post_new_user(body):
 
 def get_user_token():
     response = post_new_user(data.user_body)
-    print(response)
+
     #convertir a diccionario y obtener el auth_token
     response_json = response.json()
     auth_token = response_json['authToken']
@@ -18,14 +18,12 @@ def get_user_token():
         "Content-Type": "application/json",
         "Authorization": f"Bearer {auth_token}"
     }
-    print(headers_token)
     return headers_token
 
 
 
 def post_new_kit(body):
     headers_token = get_user_token()
-    print(headers_token)
     return requests.post(configuration.URL_SERVICE + configuration.KITS_PATH,  # inserta la dirección URL completa
                              json=body,  # inserta el cuerpo de solicitud
                              headers=headers_token)  # inserta los encabezados
