@@ -20,12 +20,6 @@ def positive_assert(first_name):
     # El resultado de la solicitud para crear un/a nuevo/a usuario/a se guarda en la variable user_response
     user_response = sender_stand_request.post_new_kit(kit_body)
 
-    print("STATUS", user_response.status_code)
-    try:
-        print("JSON:", user_response.json())
-    except Exception:
-        print("TEXT:", user_response.text)
-
     # Comprueba si el código de estado es 201
     assert user_response.status_code == 201
     # Comprueba que el campo authToken está en la respuesta y contiene un valor
@@ -36,11 +30,6 @@ def positive_assert(first_name):
 def negative_assert_code_400(kit_body):
     # Comprueba si la variable "response" almacena el resultado de la solicitud.
     user_response = sender_stand_request.post_new_kit(kit_body)
-    print("STATUS", user_response.status_code)
-    try:
-        print("JSON:", user_response.json())
-    except Exception:
-        print("TEXT:", user_response.text)
 
     # Comprueba si el código de estado es 400
     assert user_response.status_code == 400

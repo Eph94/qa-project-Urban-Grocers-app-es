@@ -8,10 +8,6 @@ user_body = {
     "address": "123 Elm Street, Hilltop"
 }
 
-my_kit = {
-    'name': 'Mi conjunto'
-}
-
 kit_body = {
     "name": "Enrique"
 }
