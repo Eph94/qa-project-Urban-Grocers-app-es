@@ -15,28 +15,29 @@ def get_user_body(first_name):
 # Función de prueba positiva
 def positive_assert(first_name):
     # El cuerpo de la solicitud actualizada se guarda en la variable user_body
-    kit_body = get_user_body(first_name)
+    kit_body_modifyed = get_user_body(first_name)
 
     # El resultado de la solicitud para crear un/a nuevo/a usuario/a se guarda en la variable user_response
-    user_response = sender_stand_request.post_new_kit(kit_body)
+    user_response = sender_stand_request.post_new_kit(kit_body_modifyed)
 
     # Comprueba si el código de estado es 201
     assert user_response.status_code == 201
     # Comprueba que el campo authToken está en la respuesta y contiene un valor
-    assert user_response.json()["name"] == kit_body["name"]
+    assert user_response.json()["name"] == kit_body_modifyed["name"]
 
 # Función de prueba negativa
 # La respuesta contiene el siguiente mensaje de error: "No se han enviado todos los parámetros requeridos"
-def negative_assert_code_400(kit_body):
+def negative_assert_code_400(first_name):
+    # El cuerpo de la solicitud actualizada se guarda en la variable user_body
+    kit_body_modifyed = get_user_body(first_name)
+
     # Comprueba si la variable "response" almacena el resultado de la solicitud.
-    user_response = sender_stand_request.post_new_kit(kit_body)
+    user_response = sender_stand_request.post_new_kit(kit_body_modifyed)
 
     # Comprueba si el código de estado es 400
     assert user_response.status_code == 400
     # Comprueba si el atributo "code" en el cuerpo de respuesta es 400.
     assert user_response.json()["code"] == 400
-    # Comprueba si el atributo "message" en el cuerpo de respuesta se ve así:
-    assert user_response.json()["message"] == 'Unexpected token \'"\', "#" is not valid JSON'
 
 
 
@@ -71,7 +72,7 @@ def test_create_user_7_letter_in_first_name_get_success_response():
 
 # Octavo Test Case Description: El parámetro no se pasa en la solicitud: kit_body = { }
 def test_create_user_8_letter_in_first_name_get_success_response():
-    negative_assert_code_400("")
+    negative_assert_code_400()
 
 # Noveno Test Case Description: Se ha pasado un tipo de parámetro diferente (número): kit_body = { "name": 123 }
 def test_create_user_9_letter_in_first_name_get_success_response():

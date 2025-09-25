@@ -21,7 +21,6 @@ def get_user_token():
     return headers_token
 
 
-
 def post_new_kit(body):
     headers_token = get_user_token()
     return requests.post(configuration.URL_SERVICE + configuration.KITS_PATH,  # inserta la dirección URL completa
